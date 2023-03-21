@@ -13,7 +13,7 @@ const Footer = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItmes: "center",
-        backgroundColor: "#2E0656",
+        backgroundColor: "#431f9a",
         color: "white",
       }}
     >

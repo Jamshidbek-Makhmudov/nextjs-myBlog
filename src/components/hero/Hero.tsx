@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import me from '../../assets/me.jpeg'
+
 
 const Hero = () => {
   return (

@@ -1,13 +1,14 @@
-import { Hero } from '@/src/components'
+import { Content, Hero, Sidebar } from '@/src/components'
 import Layout from '@/src/components/layout/Layout'
-import { Button } from '@mui/material'
-import Head from 'next/head'
-import React from 'react'
-
+import { Box } from '@mui/system'
 const indexPage = () => {
   return (
     <Layout>
       <Hero />
+      <Box sx={{ display: 'flex', gap: "20px", padding: "20px" }}>
+        <Sidebar />
+        <Content />
+      </Box>
     </Layout>
   )
 }

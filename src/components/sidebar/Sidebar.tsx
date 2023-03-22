@@ -6,9 +6,9 @@ import { navItems } from '../config/constants';
 
 const Sidebar = () => {
   return (
-    <Box width={'30%'}>
+    <Box width={{ xs: "100%", md: "30%" }}>
       <Box position={'sticky'} top={'100px'} sx={{ transition: 'all .3s ease' }}>
-        <Box padding={'20px'} border={'1px solid gray'} borderRadius={'8px'}>
+        <Box padding={'20px'} border={'1px solid gray'} borderRadius={'8px'} sx={{ boxShadow: '0px 8px 16px rgba(255, 255, 255, .5)', }}>
           <Typography variant='h5'>Latest blog</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
             {data.map(item => (
@@ -37,7 +37,7 @@ const Sidebar = () => {
             ))}
           </Box>
         </Box>
-        <Box padding={'20px'} marginTop={'20px'} border={'1px solid gray'} borderRadius={'8px'}>
+        <Box padding={'20px'} marginTop={'20px'} border={'1px solid gray'} borderRadius={'8px'} sx={{ boxShadow: '0px 8px 16px rgba(255, 255, 255, .5)', }}>
           <Typography variant='h5'>Category</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
             {navItems.map(nav => (

@@ -6,6 +6,9 @@ import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme, getDesignTokens } from '@/src/helpers/theme';
 import CssBaseline from '@mui/material/CssBaseline';
+import "nprogress/nprogress.css";
+import NProgress from "nprogress";
+import React, { useEffect } from 'react';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -15,7 +18,26 @@ export interface MyAppProps extends AppProps {
 
 
 export default function MyApp(props: MyAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps, router } = props;
+  //Nprogser (progress navbar)
+
+  useEffect(() => {
+    const handleRouteStart = () => NProgress.start();
+    const handleRouteDone = () => NProgress.done();
+
+    router.events.on("routeChangeStart", handleRouteStart);
+    router.events.on("routeChangeComplete", handleRouteDone);
+    router.events.on("routeChangeError", handleRouteDone);
+
+    return () => {
+      // Make sure to remove the event handler on unmount!
+      router.events.off("routeChangeStart", handleRouteStart);
+      router.events.off("routeChangeComplete", handleRouteDone);
+      router.events.off("routeChangeError", handleRouteDone);
+    };
+  }, []);
+
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>

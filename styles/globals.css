@@ -1,6 +1,7 @@
 #nprogress .bar{
-  /* height: 5px !important;
-  background-color: green !important; */
+  height: 5px !important;
+  background-color: green !important;
   z-index: 1100 !important ;
 
 }
+/* nprgossni styli */

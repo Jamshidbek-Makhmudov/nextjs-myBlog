@@ -59,7 +59,7 @@ const Hero = ({ blogs }: HeroProps) => {
 
                 <Box sx={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
 
-                  <Button onClick={() => router.push(`/blog/${item.slug}`)} variant="outlined">Primary</Button>
+                  <Button onClick={() => router.push(`/blog/${item.slug}`)} variant="outlined">Visit</Button>
                 </Box>
 
               </Box>

@@ -38,8 +38,8 @@ const Navbar = ({ window }: Props) => {
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingX: '20px' }}>
         <Box sx={{ my: 2, display: 'flex', alignItems: 'center', gap: '5px', }}>
-          <JavascriptOutlinedIcon />
-          <Typography variant='h6'>James</Typography>
+          <JavascriptOutlinedIcon fontSize='large' fontFamily={'fantasy'} />
+          <Typography fontFamily={'fantasy'} variant='h6'>James</Typography>
 
         </Box>
         <CloseIcon />
@@ -48,7 +48,7 @@ const Navbar = ({ window }: Props) => {
       <List>
         {navItems.map(item => (
           <ListItem key={item.route} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton onClick={() => router.push(item.route)} sx={{ textAlign: 'center' }}>
               <ListItemText primary={item.label} />
             </ListItemButton>
           </ListItem>
@@ -72,8 +72,8 @@ const Navbar = ({ window }: Props) => {
             <MenuIcon />
           </IconButton>
           <Box onClick={() => router.push(`/`)} sx={{ cursor: "pointer", my: 2, alignItems: 'center', gap: '5px', flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
-            <JavascriptOutlinedIcon />
-            <Typography variant='h6' component='div'>
+            <JavascriptOutlinedIcon fontSize='large' />
+            <Typography fontFamily={'fantasy'} variant='h6' component='div'>
               James
             </Typography>
           </Box>

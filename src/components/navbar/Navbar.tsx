@@ -18,6 +18,7 @@ import { navItems } from 'src/components/config/constants';
 import CloseIcon from '@mui/icons-material/Close';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import JavascriptOutlinedIcon from '@mui/icons-material/JavascriptOutlined';
+import { useRouter } from 'next/router';
 
 interface Props {
   window?: () => Window;
@@ -25,6 +26,7 @@ interface Props {
 
 const Navbar = ({ window }: Props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router = useRouter()
 
   const handleDrawerToggle = () => {
     setMobileOpen(prevState => !prevState);
@@ -35,9 +37,10 @@ const Navbar = ({ window }: Props) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingX: '20px' }}>
-        <Box sx={{ my: 2, display: 'flex', alignItems: 'center', gap: '5px' }}>
+        <Box sx={{ my: 2, display: 'flex', alignItems: 'center', gap: '5px', }}>
           <JavascriptOutlinedIcon />
           <Typography variant='h6'>James</Typography>
+
         </Box>
         <CloseIcon />
       </Box>
@@ -68,7 +71,7 @@ const Navbar = ({ window }: Props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ my: 2, alignItems: 'center', gap: '5px', flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
+          <Box onClick={() => router.push(`/`)} sx={{ cursor: "pointer", my: 2, alignItems: 'center', gap: '5px', flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
             <JavascriptOutlinedIcon />
             <Typography variant='h6' component='div'>
               James
@@ -77,7 +80,7 @@ const Navbar = ({ window }: Props) => {
 
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map(item => (
-              <Button key={item.route} sx={{ color: '#fff' }}>
+              <Button onClick={() => router.push(item.route)} key={item.route} sx={{ color: '#fff' }}>
                 {item.label}
               </Button>
             ))}

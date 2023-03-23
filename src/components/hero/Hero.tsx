@@ -1,12 +1,18 @@
+import { calculateEstimatedTimeToRead } from '@/src/helpers/time.format';
 import { Avatar, Box, Typography } from '@mui/material'
 import { format } from 'date-fns';
 import Image from 'next/image';
 import React from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { HeroProps } from './here.props';
+import Button from '@mui/material/Button';
+import { useRouter } from 'next/router';
 
 
-const Hero = () => {
+
+const Hero = ({ blogs }: HeroProps) => {
+  const router = useRouter()
   return (
     <Box width={'100%'} height={"70vh"} sx={{}}>
       <Carousel
@@ -18,10 +24,10 @@ const Hero = () => {
         }
         }>
 
-        {data.map(item => (
-          <Box key={item.image}>
+        {blogs.map(item => (
+          <Box key={item.id}>
             <Box sx={{ position: 'relative', width: '100%', height: '70vh' }}>
-              <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} />
+              <Image src={item.image.url} alt={item.title} fill style={{ objectFit: 'cover' }} />
               <Box
                 sx={{
                   position: 'absolute',
@@ -42,14 +48,20 @@ const Hero = () => {
                 zIndex={999}
               >
                 <Typography sx={{ fontSize: { xs: "30px", md: "50px" } }}>{item.title}</Typography>
-                <Typography color={"#c0bdbd"} sx={{ fontSize: { xs: "20px", md: "30px" } }}>{item.exerpt}</Typography>
+                <Typography color={"#c0bdbd"} sx={{ fontSize: { xs: "20px", md: "30px" } }}>{item.excerpt}</Typography>
                 <Box sx={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                  <Avatar alt={item.author.name} src={item.author.image} />
+                  <Avatar alt={item.author.name} src={item.author.avatar.url} />
                   <Box>
                     <Typography>{item.author.name}</Typography>
-                    <Box>{format(new Date(), 'dd MMM, yyyy')} &#x2022; 10min read</Box>
+                    <Box>{format(new Date(item.createdAt), 'dd MMM, yyyy')} &#x2022; {calculateEstimatedTimeToRead(item.description.text)}min read</Box>
                   </Box>
                 </Box>
+
+                <Box sx={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+
+                  <Button onClick={() => router.push(`/blog/${item.slug}`)} variant="outlined">Primary</Button>
+                </Box>
+
               </Box>
             </Box>
           </Box>

@@ -1,9 +1,13 @@
 export interface BlogsType{
-  excerpt: string
+          excerpt: string
 					id: string
 					slug: string
 					title: string
-					createdAt: string
+					createdAt: Date
+					description:{
+						text: string
+						html:string
+					}
 					image:{
 						url: string
 					}

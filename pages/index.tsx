@@ -4,16 +4,17 @@ import { Box } from '@mui/system'
 import { BlogsService } from '@/src/services/blog.service'
 import { GetServerSideProps } from 'next' //bu typescript nextdan keldi
 import { BlogsType } from '@/src/interfaces/blogs.interface'
+import { CategoryType } from '@/src/interfaces/categories.interface'
 
-const indexPage = (props: HomePageProps) => {
-  console.log(props)
+const indexPage = ({ blogs, lastBlogs, categories }: HomePageProps) => {
+
 
   return (
     <Layout>
-      <Hero />
+      <Hero blogs={blogs.slice(0, 3)} />
       <Box sx={{ display: 'flex', gap: "20px", padding: "20px", flexDirection: { xs: 'column', md: 'row' }, }}>
-        <Sidebar />
-        <Content />
+        <Sidebar lastBlogs={lastBlogs} categories={categories} />
+        <Content blogs={blogs} />
       </Box>
     </Layout>
   )
@@ -25,9 +26,13 @@ export default indexPage
 //GetServerSideProps type faqat SSR ga tegishli uni ichidagi propsni typelari ham alohida generic type qilib kiritib ketishimiz kerak
 export const getServerSideProps: GetServerSideProps<HomePageProps> = async () => {
   const blogs = await BlogsService.getAllBLogs()
+  const lastBlogs = await BlogsService.getLatestBlog()
+  const categories = await BlogsService.getCategories()
   return {
     props: {
       blogs,
+      lastBlogs,
+      categories,
     }
   }
 }
@@ -35,4 +40,6 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
 //bu typescript:
 interface HomePageProps {
   blogs: BlogsType[]
+  lastBlogs: BlogsType[]
+  categories: CategoryType[]
 }

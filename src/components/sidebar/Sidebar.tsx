@@ -3,19 +3,22 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 import { format } from 'date-fns';
 import { navItems } from '../config/constants';
+import { SidebarProps } from './sidebar.props';
+import { useRouter } from 'next/router';
 
-const Sidebar = () => {
+const Sidebar = ({ lastBlogs, categories }: SidebarProps) => {
+  const router = useRouter()
   return (
     <Box width={{ xs: "100%", md: "30%" }}>
       <Box position={'sticky'} top={'100px'} sx={{ transition: 'all .3s ease' }}>
         <Box padding={'20px'} border={'1px solid gray'} borderRadius={'8px'} sx={{ boxShadow: '0px 8px 16px rgba(255, 255, 255, .5)', }}>
           <Typography variant='h5'>Latest blog</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
-            {data.map(item => (
-              <Box key={item.title} marginTop={'20px'}>
+            {lastBlogs.map(item => (
+              <Box onClick={() => router.push(`/blog/${item.slug}`)} sx={{ cursor: "pointer" }} key={item.id} marginTop={'20px'}>
                 <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                   <Image
-                    src={item.image}
+                    src={item.image.url}
                     alt={item.title}
                     width={100}
                     height={100}
@@ -24,7 +27,7 @@ const Sidebar = () => {
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <Typography variant='body1'>{item.title}</Typography>
                     <Box sx={{ display: 'flex', gap: '10px' }}>
-                      <Avatar alt={item.author.name} src={item.author.image} />
+                      <Avatar alt={item.author.name} src={item.author.avatar.url} />
                       <Box>
                         <Typography variant='body2'>{item.author.name}</Typography>
                         <Box sx={{ opacity: '.6' }}>{format(new Date(), 'dd MMM, yyyy')}</Box>
@@ -40,9 +43,9 @@ const Sidebar = () => {
         <Box padding={'20px'} marginTop={'20px'} border={'1px solid gray'} borderRadius={'8px'} sx={{ boxShadow: '0px 8px 16px rgba(255, 255, 255, .5)', }}>
           <Typography variant='h5'>Category</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
-            {navItems.map(nav => (
-              <Fragment key={nav.route}>
-                <Button fullWidth sx={{ justifyContent: 'flex-start', height: '50px' }}>
+            {categories.map(nav => (
+              <Fragment key={nav.slug}>
+                <Button onClick={() => router.push(`/category/${nav.slug}`)} fullWidth sx={{ justifyContent: 'flex-start', height: '50px' }}>
                   {nav.label}
                 </Button>
                 <Divider />

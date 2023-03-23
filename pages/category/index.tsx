@@ -1,4 +1,5 @@
 import Layout from '@/src/components/layout/Layout';
+import SEO from '@/src/components/layout/seo/seo';
 import { Button, ButtonGroup, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { GetServerSideProps } from 'next';
@@ -10,34 +11,36 @@ const CategoryPage = ({ categories }: CategoryPageProps) => {
   const rotuer = useRouter();
 
   return (
-    <Layout>
-      <Box
-        width={{ xs: '100%', md: '80%' }}
-        marginX={'auto'}
-        marginTop={'10vh'}
-        borderRadius={'8px'}
-        height={{ xs: '30vh', md: '50vh' }}
-        sx={{
-          backgroundColor: 'black',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          rowGap: '10px',
-        }}
-      >
-        <Typography variant='h3' fontFamily={'cursive'}>
-          All Categories
-        </Typography>
-        <ButtonGroup variant='contained' aria-label='outlined primary button group'>
-          {categories.map(item => (
-            <Button onClick={() => rotuer.push(`/category/${item.slug}`)} key={item.slug}>
-              # {item.label}
-            </Button>
-          ))}
-        </ButtonGroup>
-      </Box>
-    </Layout>
+    <SEO metaTitle='All categories'>
+      <Layout>
+        <Box
+          width={{ xs: '100%', md: '80%' }}
+          marginX={'auto'}
+          marginTop={'10vh'}
+          borderRadius={'8px'}
+          height={{ xs: '30vh', md: '50vh' }}
+          sx={{
+            backgroundColor: 'black',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            rowGap: '10px',
+          }}
+        >
+          <Typography variant='h3' fontFamily={'cursive'}>
+            All Categories
+          </Typography>
+          <ButtonGroup variant='contained' aria-label='outlined primary button group'>
+            {categories.map(item => (
+              <Button onClick={() => rotuer.push(`/category/${item.slug}`)} key={item.slug}>
+                # {item.label}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </Box>
+      </Layout>
+    </SEO>
   );
 };
 

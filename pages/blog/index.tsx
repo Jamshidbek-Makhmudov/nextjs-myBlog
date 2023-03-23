@@ -1,5 +1,6 @@
 import { Content } from '@/src/components'
 import Layout from '@/src/components/layout/Layout'
+import SEO from '@/src/components/layout/seo/seo'
 import { BlogsType } from '@/src/interfaces/blogs.interface'
 import { BlogsService } from '@/src/services/blog.service'
 import { Box } from '@mui/material'
@@ -8,11 +9,14 @@ import React from 'react'
 
 const BlogPage = ({ blogs }: BlogsProps) => {
   return (
-    <Layout>
-      <Box sx={{ display: 'flex', gap: "20px", padding: "20px", justifyContent: "center", flexDirection: { xs: 'column', md: 'row' }, }}>
-        <Content blogs={blogs} />
-      </Box>
-    </Layout>
+    <SEO metaTitle='All blogs'>
+
+      <Layout>
+        <Box sx={{ display: 'flex', gap: "20px", padding: "20px", justifyContent: "center", flexDirection: { xs: 'column', md: 'row' }, }}>
+          <Content blogs={blogs} />
+        </Box>
+      </Layout>
+    </SEO>
   )
 }
 
